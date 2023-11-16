@@ -56,7 +56,7 @@ app.layout = html.Div([
     Input(component_id='dropdown-statistics',component_property='disabled'))
 
 def update_input_container(selected_statistics):
-    if selected_statistics =='Yearly Statistics': 
+    if selected_statistics =='Recession Period Statistics': 
         return False
     else: 
         return True
@@ -64,9 +64,10 @@ def update_input_container(selected_statistics):
 #Callback for plotting
 # Define the callback function to update the input container based on the selected statistics
 @app.callback(
-     Output(component_id='select year', component_property='diabled'),
-    [Input(component_id='dropdown-statistics', component_property='disabled')]
-    )
+       Output(component_id='output-container', component_property='children'),
+       [Input(component_id='dropdown-statistics', component_property='value'),
+       Input(component_id='select-year', component_property='value')]
+       )
 
 def update_output_container(selected_statistics, input_year):
     if selected_statistics == 'Recession Period Statistics':
