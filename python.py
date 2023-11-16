@@ -10,7 +10,8 @@ import plotly.express as px
 data = pd.read_csv('https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/Data%20Files/historical_automobile_sales.csv')
 
 # Initialize the Dash app
-app = dash.Dash(__name__, suppress_callback_exceptions=True)
+app = dash.Dash(__name__)
+app.config.suppress_callback_exceptions = True
 
 # Set the title of the dashboard
 #app.title = "Automobile Statistics Dashboard"
@@ -91,7 +92,7 @@ def update_output_container(selected_statistics, input_year):
 # Plot 3 Pie chart for total expenditure share by vehicle type during recessions
         # use groupby to create relevant data for plotting
         exp_rec= recession_data.groupby('Vehicle_Type')['Advertising_Expenditure'].sum().reset_index()
-        R_chart3 = dcc.Graph(figure=px.pie(exp_rec, values='Advertising_Expenditure', names='Vehicle_Type', title='Total expenditure share by Vehicle Type during recession'))
+        R_chart3 = dcc.Graph(figure=px.pie(exp_rec, value='Advertising_Expenditure', names='Vehicle_Type', title='Total expenditure share by Vehicle Type during recession'))
                                   
 
 # Plot 4 bar chart for the effect of unemployment rate on vehicle type and sales
